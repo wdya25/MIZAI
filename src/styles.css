@@ -1,0 +1,605 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #496046 0%, #1e3b1c 50%, #436d40 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Dekorasi Background */
+body::before {
+  content: '';
+  position: fixed;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  opacity: 0.1;
+  top: -200px;
+  right: -200px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+  animation: float 10s ease-in-out infinite;
+  filter: blur(40px);
+  pointer-events: none;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  opacity: 0.1;
+  bottom: -150px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
+  animation: float 12s ease-in-out infinite reverse;
+  filter: blur(35px);
+  pointer-events: none;
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) scale(1);
+  }
+
+  50% {
+    transform: translateY(-30px) translateX(-15px) scale(1.05);
+  }
+}
+
+body.dark-mode {
+  background: linear-gradient(135deg, #1a3d2e 0%, #0d2818 50%, #051509 100%);
+  color: #e8f5e9;
+}
+
+body.dark-mode::before,
+body.dark-mode::after {
+  opacity: 0.05;
+}
+
+/* Container Utama */
+.container {
+  max-width: 950px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 32px;
+  padding: 50px 45px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  position: relative;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  animation: slideUp 0.8s ease-out;
+  margin-top: 45px;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body.dark-mode .container {
+  background: rgba(20, 40, 30, 0.95);
+  border: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+/* Tombol Kontrol di Atas */
+.controls {
+  position: absolute;
+  top: 25px;
+  right: 25px;
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+}
+
+.control-btn {
+  background: white;
+  border: 2px solid #4caf50;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  color: #2e7d32;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 15px rgba(76, 175, 80, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.control-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(76, 175, 80, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.control-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+body.dark-mode .control-btn {
+  background: #2d4a3a;
+  border-color: #66bb6a;
+  color: #81c784;
+}
+
+.control-btn:hover {
+  background: #4caf50;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4);
+  border-color: #4caf50;
+}
+
+.control-btn:active {
+  transform: translateY(-1px);
+}
+
+/* Gambar Utama SDGs */
+.main-image {
+  width: 300px;
+  height: auto;
+  margin: 30px auto 35px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border: 4px solid rgba(76, 175, 80, 0.2);
+  animation: fadeIn 0.8s ease-out 0.2s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.main-image:hover {
+  transform: scale(1.08) translateY(-5px);
+  box-shadow: 0 15px 40px rgba(76, 175, 80, 0.35);
+  border-color: #4caf50;
+}
+
+/* Deskripsi Teks */
+.description {
+  text-align: justify;
+  line-height: 2;
+  font-size: 16px;
+  color: #2c3e2f;
+  margin: 25px 0;
+  padding: 25px 30px;
+  background: rgba(76, 175, 80, 0.05);
+  border-radius: 20px;
+  border-left: 4px solid #4caf50;
+  animation: fadeIn 1s ease-out 0.4s both;
+}
+
+body.dark-mode .description {
+  color: #c8e6c9;
+  background: rgba(76, 175, 80, 0.1);
+  border-left-color: #66bb6a;
+}
+
+/* Container Icon SDG */
+.sdgs-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 35px 0;
+  flex-wrap: wrap;
+  animation: fadeIn 1.2s ease-out 0.6s both;
+}
+
+.sdg-icon {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+  border: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.sdg-icon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.sdg-icon:hover::before {
+  opacity: 1;
+}
+
+.sdg-icon:hover {
+  transform: translateY(-10px) scale(1.1);
+  box-shadow: 0 15px 35px rgba(76, 175, 80, 0.4);
+  border-color: #4caf50;
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.92);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  animation: fadeInLightbox 0.4s ease;
+  backdrop-filter: blur(5px);
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-content {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 16px;
+  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6);
+  animation: zoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 32px;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  line-height: 1;
+  font-weight: 300;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.lightbox-close:hover {
+  background: #f44336;
+  border-color: #f44336;
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 6px 20px rgba(244, 67, 54, 0.5);
+}
+
+@keyframes fadeInLightbox {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Audio Hidden */
+audio {
+  display: none;
+}
+
+/* Opsi Container */
+.opsi-container {
+  text-align: center;
+  margin: 35px 0;
+  animation: fadeIn 1.4s ease-out 0.8s both;
+}
+
+.opsi-container h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #2e7d32;
+  font-weight: 700;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.05);
+  letter-spacing: -0.5px;
+}
+
+body.dark-mode .opsi-container h3 {
+  color: #81c784;
+}
+
+.opsi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 15px;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.opsi-btn {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.3);
+  position: relative;
+  overflow: hidden;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.opsi-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.opsi-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.opsi-btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 10px 30px rgba(76, 175, 80, 0.4);
+  background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+}
+
+.opsi-btn:active {
+  transform: translateY(-2px) scale(1.02);
+}
+
+body.dark-mode .opsi-btn {
+  background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+}
+
+body.dark-mode .opsi-btn:hover {
+  background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+  }
+
+  .container {
+    padding: 40px 25px;
+    border-radius: 24px;
+  }
+
+  .controls {
+    position: static;
+    justify-content: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+  }
+
+  .control-btn {
+    padding: 9px 18px;
+    font-size: 13px;
+  }
+
+  .main-image {
+    width: 240px;
+    margin: 25px auto 30px;
+  }
+
+  .sdg-icon {
+    width: 90px;
+    height: 90px;
+  }
+
+  .description {
+    font-size: 15px;
+    padding: 20px 20px;
+    line-height: 1.8;
+  }
+
+  .opsi-container h3 {
+    font-size: 1.3rem;
+  }
+
+  .opsi-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+
+  .opsi-btn {
+    padding: 14px 16px;
+    font-size: 0.95rem;
+  }
+
+  .lightbox-close {
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  .main-image {
+    width: 200px;
+  }
+
+  .sdg-icon {
+    width: 75px;
+    height: 75px;
+  }
+
+  .description {
+    font-size: 14px;
+    padding: 18px;
+  }
+
+  .opsi-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .opsi-btn {
+    padding: 12px 14px;
+    font-size: 0.9rem;
+  }
+}
+
+/* Responsif untuk layar tablet */
+@media (max-width: 768px) {
+  .topbar {
+    flex-direction: column;
+    /* Header menjadi vertikal */
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-left {
+    flex-wrap: wrap;
+    /* Tombol navigasi menjadi baris baru jika terlalu panjang */
+    justify-content: center;
+  }
+
+  .container {
+    padding: 10px;
+    /* Kurangi padding untuk layar kecil */
+  }
+
+  .opsi-grid {
+    grid-template-columns: repeat(2, 1fr);
+    /* Tampilkan 2 tombol per baris */
+    gap: 10px;
+  }
+
+  .sdgs-container {
+    flex-direction: column;
+    /* Gambar SDGs menjadi vertikal */
+    align-items: center;
+  }
+
+  .sdg-icon {
+    width: 80px;
+    /* Kurangi ukuran gambar SDGs */
+    margin-bottom: 10px;
+  }
+}
+
+/* Responsif untuk layar ponsel */
+@media (max-width: 480px) {
+
+  .nav-btn,
+  .icon-btn {
+    font-size: 0.9rem;
+    /* Kurangi ukuran font tombol */
+    padding: 8px 16px;
+    /* Kurangi padding tombol */
+  }
+
+  .description {
+    font-size: 0.9rem;
+    /* Kurangi ukuran font deskripsi */
+  }
+
+  .opsi-grid {
+    grid-template-columns: 1fr;
+    /* Tampilkan 1 tombol per baris */
+  }
+
+  .sdg-icon {
+    width: 60px;
+    /* Kurangi ukuran gambar SDGs lebih kecil */
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-top: 60px;
+    /* Kurangi margin untuk layar kecil */
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin-top: 40px;
+    /* Kurangi margin lebih jauh untuk layar ponsel */
+  }
+}
